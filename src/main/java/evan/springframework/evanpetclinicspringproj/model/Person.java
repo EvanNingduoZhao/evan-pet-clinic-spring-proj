@@ -1,6 +1,7 @@
 package evan.springframework.evanpetclinicspringproj.model;
 
 public class Person {
+
     private String firstname;
     private String lastname;
 
