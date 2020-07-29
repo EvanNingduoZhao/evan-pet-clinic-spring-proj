@@ -1,4 +1,4 @@
-package evan.springframework.evanpetclinicspringproj;
+package evan.springframework.evenpetclinicspringproj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
