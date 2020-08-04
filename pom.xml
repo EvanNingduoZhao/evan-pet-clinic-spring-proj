@@ -40,7 +40,7 @@
 	</build>
 
 	<scm>
-		<developerConnection>scm:git:ssh:mavgithub.com:EvanNingduoZhao/evan-pet-clinic-spring-proj.git</developerConnection>
+		<developerConnection>scm:git:git@github.com:EvanNingduoZhao/evan-pet-clinic-spring-proj.git</developerConnection>
   </scm>
 
 </project>
