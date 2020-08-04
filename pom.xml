@@ -41,7 +41,6 @@
 
 	<scm>
 		<developerConnection>scm:git:git@github.com:EvanNingduoZhao/evan-pet-clinic-spring-proj.git</developerConnection>
-	  <tag>evan-pet-clinic-spring-proj-0.0.1</tag>
   </scm>
 
 </project>
