@@ -14,7 +14,7 @@
 	</parent>
 	<groupId>evan.springframework</groupId>
 	<artifactId>evan-pet-clinic-spring-proj</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>evan-pet-clinic-spring-proj</name>
 	<description>This is a project that models the operations of a pet clinic. The purpose of building this project is to learn the different components of the Java Spring Framework as I progress along the construction of this project. </description>
 
@@ -69,7 +69,7 @@
 
 	<scm>
 		<developerConnection>scm:git:https://github.com/EvanNingduoZhao/evan-pet-clinic-spring-proj.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>evan-pet-clinic-spring-proj-0.0.1</tag>
   </scm>
 
 </project>
