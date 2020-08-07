@@ -1,5 +1,5 @@
 package evan.springframework.evanpetclinicspringproj.model;
 
-public class PetType {
+public class PetType extends BaseEntity{
 
 }
