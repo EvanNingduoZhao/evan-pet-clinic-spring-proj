@@ -4,12 +4,11 @@ import evan.springframework.evanpetclinicspringproj.model.Owner;
 import evan.springframework.evanpetclinicspringproj.model.Vet;
 import evan.springframework.evanpetclinicspringproj.services.OwnerService;
 import evan.springframework.evanpetclinicspringproj.services.VetService;
-import evan.springframework.evanpetclinicspringproj.services.map.OwnerServiceMap;
-import evan.springframework.evanpetclinicspringproj.services.map.VetServiceMap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
+
 // CommandLineRunner是一个springboot特殊的interface，在Spring启动以后，spring context up and running
 // 之后就会首先找到所有implements CommandLine的class，之后execute它们里面的run method
 public class DataLoader implements CommandLineRunner {
@@ -17,10 +16,12 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
 
-    public DataLoader() {
-        ownerService = new OwnerServiceMap();
-        vetService = new VetServiceMap();
+
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
+
     @Override
     public void run(String... args) throws Exception {
         Owner owner1 = new Owner();

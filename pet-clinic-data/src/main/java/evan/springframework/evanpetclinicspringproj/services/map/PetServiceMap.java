@@ -2,9 +2,11 @@ package evan.springframework.evanpetclinicspringproj.services.map;
 
 import evan.springframework.evanpetclinicspringproj.model.Pet;
 import evan.springframework.evanpetclinicspringproj.services.PetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     @Override
     public Set<Pet> findAll() {
