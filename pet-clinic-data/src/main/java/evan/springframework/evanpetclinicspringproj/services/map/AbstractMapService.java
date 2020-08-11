@@ -11,12 +11,13 @@ public abstract  class AbstractMapService <T,ID>{
         return new HashSet<>(map.values());
     }
 
-    T findByID(ID id){
+    T findById(ID id){
         return map.get(id);
     }
 
     T  save(ID id, T object){
         map.put(id,object);
+
         return object;
     }
 
