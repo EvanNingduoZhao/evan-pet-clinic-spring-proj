@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 // CommandLineRunner是一个springboot特殊的interface，在Spring启动以后，spring context up and running
 // 之后就会首先找到所有implements CommandLine的class，之后execute它们里面的run method
 public class DataLoader implements CommandLineRunner {
-
+    //这里的ownerService和vetService虽然reference都是OwnerService和PetService这两个interface
+    // 但是实际上在下面的constructor interjection里被inject进来的bean是OwnerServiceMap和
+    // PetServiceMap这两个concrete class的object instance
     private final OwnerService ownerService;
     private final VetService vetService;
 
@@ -26,30 +28,33 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Owner owner1 = new Owner();
         owner1.setId(1L);
-        owner1.setFirstname("Michael");
-        owner1.setLastname("Weston");
-
+        owner1.setFirstName("Michael");
+        owner1.setLastName("Weston");
+        // 这个被inject进来的ownerService它所属的class OwnerServiceMap是同时extends AbstractMapService
+        //和implement OwnerService（OwnerService又是extends CrudService的）的
+        // 所以ownerService有一个attribute是一个hashmap，和一堆对这个hashmap进行CRUD operations
+        // 的class methods，这个hashmap里存的value是owner objects，key是value那个owner object的id
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
         owner2.setId(2L);
-        owner2.setFirstname("Fiona");
-        owner2.setLastname("Glenanne");
+        owner2.setFirstName("Fiona");
+        owner2.setLastName("Glenanne");
 
         ownerService.save(owner2);
         System.out.println("Loaded Owners....");
 
         Vet vet1 = new Vet();
         vet1.setId(1L);
-        vet1.setFirstname("Sam");
-        vet1.setLastname("Axe");
+        vet1.setFirstName("Sam");
+        vet1.setLastName("Axe");
 
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
         vet2.setId(2L);
-        vet2.setFirstname("Jessie");
-        vet2.setLastname("Porter");
+        vet2.setFirstName("Jessie");
+        vet2.setLastName("Porter");
 
         vetService.save(vet2);
         System.out.println("Loaded Vets.....");
