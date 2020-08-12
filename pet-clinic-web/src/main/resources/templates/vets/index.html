@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'vets')}">
 <head>
     <meta charset="UTF-8"/>
     <title>List of Vets</title>
 </head>
 <body>
 <!--    注意text=后面的string要用单引号扩起来以后 后面再用双引号扩起来一次-->
-    <h1 th:text="'List of Vets'">List of Vets...</h1>
+<!--下面这行comment完全是给IntelliJ看的-->
+<!--/*@thymesVar id="vet" type="evan.springframework.evanpetclinicspringproj.model.Vet"*/-->
+    <h2 th:text="'List of Vets'">List of Vets...</h2>
+<!--让table的每个row是一条一条的色块-->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="vet : ${vets}">
+            <td th:text="${vet.id}">1</td>
+            <td th:text="${vet.firstName}">Joe</td>
+            <td th:text="${vet.lastName}">Buck</td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
