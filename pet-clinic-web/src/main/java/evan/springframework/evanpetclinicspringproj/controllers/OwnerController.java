@@ -1,4 +1,4 @@
-package evan.springframework.evenpetclinicspringproj.controllers;
+package evan.springframework.evanpetclinicspringproj.controllers;
 
 import evan.springframework.evanpetclinicspringproj.services.OwnerService;
 import org.springframework.stereotype.Controller;

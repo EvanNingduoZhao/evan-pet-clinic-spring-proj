@@ -1,8 +1,10 @@
-package evan.springframework.evenpetclinicspringproj.bootstrap;
+package evan.springframework.evanpetclinicspringproj.bootstrap;
 
 import evan.springframework.evanpetclinicspringproj.model.Owner;
+import evan.springframework.evanpetclinicspringproj.model.PetType;
 import evan.springframework.evanpetclinicspringproj.model.Vet;
 import evan.springframework.evanpetclinicspringproj.services.OwnerService;
+import evan.springframework.evanpetclinicspringproj.services.PetTypeService;
 import evan.springframework.evanpetclinicspringproj.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -15,19 +17,23 @@ public class DataLoader implements CommandLineRunner {
     //这里的ownerService和vetService虽然reference都是OwnerService和PetService这两个interface
     // 但是实际上在下面的constructor interjection里被inject进来的bean是OwnerServiceMap和
     // PetServiceMap这两个concrete class的object instance
+
     private final OwnerService ownerService;
     private final VetService vetService;
+    private final PetTypeService petTypeService;
 
 
-    public DataLoader(OwnerService ownerService, VetService vetService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
+        this.petTypeService = petTypeService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        PetType dog = new PetType();
+        dog.setName("Dog");
         Owner owner1 = new Owner();
-        owner1.setId(1L);
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
         // 这个被inject进来的ownerService它所属的class OwnerServiceMap是同时extends AbstractMapService
@@ -37,7 +43,6 @@ public class DataLoader implements CommandLineRunner {
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
-        owner2.setId(2L);
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
 
@@ -45,14 +50,12 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Loaded Owners....");
 
         Vet vet1 = new Vet();
-        vet1.setId(1L);
         vet1.setFirstName("Sam");
         vet1.setLastName("Axe");
 
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
-        vet2.setId(2L);
         vet2.setFirstName("Jessie");
         vet2.setLastName("Porter");
 

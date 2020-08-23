@@ -6,6 +6,9 @@
 </head>
 <body>
 <!--    注意text=后面的string要用单引号扩起来以后 后面再用双引号扩起来一次-->
+<!--这里的#{welcome}实际上是一个variable，在resources/messages里面的有4个message.properties的文件-->
+<!--有一个是default的另外三个是三种不同的语言，welcome这个variable在每个不同语言的message.properties文件-->
+<!--里都对应着该语言里的welcome-->
     <h2 th:text="#{welcome}">Welcome</h2>
     <div class="row">
         <div class="col-md-12">
