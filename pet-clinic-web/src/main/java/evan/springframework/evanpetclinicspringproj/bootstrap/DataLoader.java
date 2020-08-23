@@ -1,6 +1,7 @@
 package evan.springframework.evanpetclinicspringproj.bootstrap;
 
 import evan.springframework.evanpetclinicspringproj.model.Owner;
+import evan.springframework.evanpetclinicspringproj.model.Pet;
 import evan.springframework.evanpetclinicspringproj.model.PetType;
 import evan.springframework.evanpetclinicspringproj.model.Vet;
 import evan.springframework.evanpetclinicspringproj.services.OwnerService;
@@ -8,6 +9,8 @@ import evan.springframework.evanpetclinicspringproj.services.PetTypeService;
 import evan.springframework.evanpetclinicspringproj.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 
@@ -42,6 +45,16 @@ public class DataLoader implements CommandLineRunner {
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
+        owner1.setAddress("123 Morewood Ave");
+        owner1.setCity("Pittsburgh");
+        owner1.setTelephone("1231231234");
+
+        Pet mikesPet = new Pet();
+        mikesPet.setPetType(savedDogPetType);
+        mikesPet.setOwner(owner1);
+        mikesPet.setBirthDate(LocalDate.now());
+        mikesPet.setName("Rosco");
+        owner1.getPets().add(mikesPet);
         // 这个被inject进来的ownerService它所属的class OwnerServiceMap是同时extends AbstractMapService
         //和implement OwnerService（OwnerService又是extends CrudService的）的
         // 所以ownerService有一个attribute是一个hashmap，和一堆对这个hashmap进行CRUD operations
@@ -51,6 +64,16 @@ public class DataLoader implements CommandLineRunner {
         Owner owner2 = new Owner();
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
+        owner2.setAddress("123 Morewood Ave");
+        owner2.setCity("Pittsburgh");
+        owner2.setTelephone("1234123123");
+
+        Pet fionasCat = new Pet();
+        fionasCat.setName("Just Cat");
+        fionasCat.setOwner(owner2);
+        fionasCat.setBirthDate(LocalDate.now());
+        fionasCat.setPetType(savedCatPetType);
+        owner2.getPets().add(fionasCat);
 
         ownerService.save(owner2);
         System.out.println("Loaded Owners....");
