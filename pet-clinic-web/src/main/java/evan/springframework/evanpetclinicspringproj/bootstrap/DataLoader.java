@@ -1,11 +1,9 @@
 package evan.springframework.evanpetclinicspringproj.bootstrap;
 
-import evan.springframework.evanpetclinicspringproj.model.Owner;
-import evan.springframework.evanpetclinicspringproj.model.Pet;
-import evan.springframework.evanpetclinicspringproj.model.PetType;
-import evan.springframework.evanpetclinicspringproj.model.Vet;
+import evan.springframework.evanpetclinicspringproj.model.*;
 import evan.springframework.evanpetclinicspringproj.services.OwnerService;
 import evan.springframework.evanpetclinicspringproj.services.PetTypeService;
+import evan.springframework.evanpetclinicspringproj.services.SpecialityService;
 import evan.springframework.evanpetclinicspringproj.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -24,16 +22,32 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final SpecialityService specialityService;
 
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
+                      SpecialityService specialityService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.specialityService = specialityService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        // 这里我们把下面具体loaddata 的code整合成一个method了
+        // （选中这一段code，right click, extract method）
+        // 现在还看不出这样做的作用，但是以后开始用JPA或者MySql的话，就可以先check petTypeService
+        // 里有没有data，因为可能JPA或者MySQL已经load data进去了，只有里面没有data的情况下，才会执行loadData
+        // 这里看petTypeService只是用来确定有没有data已经被load进去了，看别的service也一样的
+        int count = petTypeService.findAll().size();
+        if (count==0) {
+            loadData();
+        }
+
+    }
+
+    private void loadData() {
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dog);
@@ -41,6 +55,21 @@ public class DataLoader implements CommandLineRunner {
         PetType cat = new PetType();
         cat.setName("Cat");
         PetType savedCatPetType = petTypeService.save(cat);
+
+        Speciality radiology = new Speciality();
+        radiology.setDescription("Radiology");
+        // 下面这行的作用是persist radiology, savedRadiology和radiology的区别是savedRadiology是被
+        // specialityService的save method return的Speciality object，在执行save这个method时，
+        // 给savedRadiology这个object assign了ID
+        Speciality savedRadiology = specialityService.save(radiology);
+
+        Speciality surgery = new Speciality();
+        surgery.setDescription("Surgery");
+        Speciality savedSurgery = specialityService.save(surgery);
+
+        Speciality dentistry = new Speciality();
+        radiology.setDescription("Dentistry");
+        Speciality savedDentistry = specialityService.save(dentistry);
 
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
@@ -81,17 +110,16 @@ public class DataLoader implements CommandLineRunner {
         Vet vet1 = new Vet();
         vet1.setFirstName("Sam");
         vet1.setLastName("Axe");
+        vet1.getSpecialities().add(savedRadiology);
 
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
         vet2.setFirstName("Jessie");
         vet2.setLastName("Porter");
+        vet2.getSpecialities().add(savedSurgery);
 
         vetService.save(vet2);
         System.out.println("Loaded Vets.....");
-
-
-
     }
 }
