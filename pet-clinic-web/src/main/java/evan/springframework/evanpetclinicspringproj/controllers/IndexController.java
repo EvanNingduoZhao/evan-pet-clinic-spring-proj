@@ -14,4 +14,10 @@ public class IndexController {
     public String index(){
         return "index";
     }
+    //在要访问http://localhost:8080/owners/find时
+    // 执行findOwners这个method，return我们写好的notimplemented这个html
+    @RequestMapping("/oups")
+    public String oupsHandler(){
+        return "notimplemented";
+    }
 }

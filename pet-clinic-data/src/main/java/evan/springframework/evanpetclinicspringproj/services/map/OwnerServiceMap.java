@@ -43,6 +43,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     public Owner save(Owner object) {
         if(object != null){
             if (object.getPets()!=null){
+                //下面的code是对于owner的每一个pet，都保证这个pet有petType，且petType有id，且这个pet自己也有id
                 object.getPets().forEach(pet ->{
                     if(pet.getPetType()!=null){
                         if(pet.getPetType().getId()==null){
